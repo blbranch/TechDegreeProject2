@@ -27,7 +27,7 @@ showPage(studentList, 1)
 ***/
 const appendPageLinks = (list) => {
    const liList = studentList.getElementsByTagName('LI')
-   const pages = Math.ceil(liList.length / pageDisplayLimit)
+   const pageCount = Math.ceil(liList.length / pageDisplayLimit)
    
    let div = document.createElement('DIV');
    div.className = 'pagination';
@@ -35,9 +35,12 @@ const appendPageLinks = (list) => {
    let page = document.getElementsByClassName('page')[0];
    
    let ul = document.createElement('UL')
-   for (let i = 0; i < pages; i++) {
-      let li = document.createElement('LI')
-      li.textContent = i+1
+   for (let i = 0; i < pageCount; i++) {
+      let li = document.createElement('LI');
+      //li.textContent = i+1;
+      let anchor = document.createElement('A');
+      anchor.textContent = i+1;
+      li.appendChild(anchor);
       ul.appendChild(li);
    }
    
