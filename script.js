@@ -64,3 +64,24 @@ const appendPageLinks = (list) => {
 }
 
 appendPageLinks(studentList)
+
+const addSearchBar = () => {
+
+   let div = document.createElement('DIV');
+   div.className = 'student-search';
+
+   let input = document.createElement('INPUT');
+   input.placeholder = 'Search for students...';
+
+   let button = document.createElement('BUTTON');
+   button.textContent = 'Search';
+
+   div.appendChild(input)
+   div.appendChild(button);
+   
+   let header = document.getElementsByClassName('page-header cf')[0];
+   header.appendChild(div)
+   
+}
+
+addSearchBar()
