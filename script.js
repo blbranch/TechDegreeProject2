@@ -11,7 +11,7 @@ const showPage = (list, page) => {
    for (let i = 0; i < nodeList.length; i++) {
       let currentStudent = list.children[i];
       
-     if (i >= startIndex && i <= endIndex) {
+     if (i >= startIndex && i < endIndex) {
         currentStudent.style.display = 'inherit';          
    } else {
       currentStudent.style.display = 'none';          
@@ -37,16 +37,18 @@ const appendPageLinks = (list) => {
    let ul = document.createElement('UL')
    for (let i = 0; i < pageCount; i++) {
       let li = document.createElement('LI');
-      //li.textContent = i+1;
       let anchor = document.createElement('A');
       anchor.textContent = i+1;
+      anchor.addEventListener("click", (e) => {
+         showPage(studentList, e.target.textContent)
+      })
+         
       li.appendChild(anchor);
       ul.appendChild(li);
    }
    
    div.appendChild(ul)
    page.appendChild(div)
-   console.log(page)
 }
 
 appendPageLinks(studentList)
