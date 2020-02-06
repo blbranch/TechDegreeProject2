@@ -1,4 +1,3 @@
-
 const pageDisplayLimit = 10;
 const studentList = document.getElementsByClassName('student-list')[0];
 
@@ -21,10 +20,7 @@ const showPage = (list, page) => {
 
 showPage(studentList, 1)
 
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
+//Append Page Links Function
 const appendPageLinks = (list) => {
    const liList = studentList.getElementsByTagName('LI')
    const pageCount = Math.ceil(liList.length / pageDisplayLimit)
@@ -35,12 +31,28 @@ const appendPageLinks = (list) => {
    let page = document.getElementsByClassName('page')[0];
    
    let ul = document.createElement('UL')
+
    for (let i = 0; i < pageCount; i++) {
       let li = document.createElement('LI');
       let anchor = document.createElement('A');
       anchor.textContent = i+1;
+      //adding a nav link class name so function below doesn't clear active state from non nav-link buttons
+      anchor.classList.add('nav-link')
+            
       anchor.addEventListener("click", (e) => {
-         showPage(studentList, e.target.textContent)
+         e.preventDefault();
+         //find active nav link anchor tags
+         let activeLinks = document.getElementsByClassName('nav-link active')
+         //remove active class from any active nav link anchor tags
+         while (activeLinks[0]) {
+            activeLinks[0].classList.remove('active')
+         }
+         
+         //set active class to clicked nav link button
+         e.target.className += ' active';
+         //call showPage function with student list and clicked link's text content as parameters
+         showPage(studentList, e.target.textContent);
+                  
       })
          
       li.appendChild(anchor);
