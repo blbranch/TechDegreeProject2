@@ -1,14 +1,14 @@
 const pageDisplayLimit = 10;
-const studentList = document.getElementsByClassName('student-list')[0];
+const studentList = document.getElementsByClassName('student-list')[0].getElementsByTagName('LI')
+
 
 //Show Page Function //
 const showPage = (list, page) => {
    let startIndex = (page * pageDisplayLimit) - pageDisplayLimit;
    let endIndex = page * pageDisplayLimit;
-   const nodeList = studentList.getElementsByTagName('LI')
-      
-   for (let i = 0; i < nodeList.length; i++) {
-      let currentStudent = list.children[i];
+         
+   for (let i = 0; i < list.length; i++) {
+      let currentStudent = list[i] 
       
      if (i >= startIndex && i < endIndex) {
         currentStudent.style.display = 'inherit';          
@@ -20,10 +20,18 @@ const showPage = (list, page) => {
 
 showPage(studentList, 1)
 
+
+
+
 //Append Page Links Function
 const appendPageLinks = (list) => {
-   const liList = studentList.getElementsByTagName('LI')
-   const pageCount = Math.ceil(liList.length / pageDisplayLimit)
+   //const pageCount = Math.ceil(liList.length / pageDisplayLimit)
+   const pageCount = Math.ceil(list.length / pageDisplayLimit)
+
+   let previousPages = document.getElementsByClassName('pagination');
+   while(previousPages.length > 0) {
+      previousPages[0].parentNode.removeChild(previousPages[0]);
+   }
    
    let div = document.createElement('DIV');
    div.className = 'pagination';
@@ -51,7 +59,7 @@ const appendPageLinks = (list) => {
          //set active class to clicked nav link button
          e.target.className += ' active';
          //call showPage function with student list and clicked link's text content as parameters
-         showPage(studentList, e.target.textContent);
+         showPage(list, e.target.textContent);
                   
       })
          
@@ -59,10 +67,11 @@ const appendPageLinks = (list) => {
       ul.appendChild(li);
    }
    
-   div.appendChild(ul)
-   page.appendChild(div)
+   div.appendChild(ul);
+   page.appendChild(div);
 }
 
+//call at page load
 appendPageLinks(studentList)
 
 const addSearchBar = () => {
@@ -72,16 +81,64 @@ const addSearchBar = () => {
 
    let input = document.createElement('INPUT');
    input.placeholder = 'Search for students...';
+   input.setAttribute('id', 'searchBar');
 
    let button = document.createElement('BUTTON');
    button.textContent = 'Search';
+   button.setAttribute('id', 'searchButton');
 
-   div.appendChild(input)
+   div.appendChild(input);
    div.appendChild(button);
    
    let header = document.getElementsByClassName('page-header cf')[0];
-   header.appendChild(div)
+   header.appendChild(div);
+      
+}
+
+addSearchBar();
+
+const searchBar = document.querySelector('#searchBar');
+const searchButton = document.querySelector('#searchButton');
+
+searchBar.addEventListener('keyup', (e) => {
+   searchInput(e.target.value, studentList)
+})
+
+function searchInput(searchInput, list) {   
+
+   let matches = [];
+   
+   for (let i = 0; i < list.length; i++) {
+      let currentStudent = list[i];
+      let currentStudentName = currentStudent.querySelector('.student-details > h3').textContent;
+      
+      if (searchInput.length !== 0 && currentStudentName.toLowerCase().includes(searchInput.toLowerCase())) {
+         currentStudent.style.display = 'inherit';
+         matches.push(currentStudent);         
+
+      } else {
+         currentStudent.style.display = 'none';
+       }       
+
+      }
+      
+      if (searchInput.length === 0) {
+         appendPageLinks(studentList);
+         showPage(studentList, 1);
+      }
+
+      if (matches.length > 0) {
+         appendPageLinks(matches)
+         showPage(matches, 1)
+      }
+
+      if (matches.length === 0 && searchInput.length !== 0) {
+         alert('no matches found')
+         //TODO add logic here to create Inner HTML that no students were found.  Have to delete this at the beginning of this function
+         appendPageLinks([])
+      }
    
 }
 
-addSearchBar()
+
+
