@@ -79,8 +79,10 @@ const appendPageLinks = (list) => {
    page.appendChild(div);
 
    //on page load and after searching set the first nav link to active
-   let firstNavButton = document.getElementsByClassName('nav-link')[0]
-   firstNavButton.className += ' active'
+   if (document.getElementsByClassName('nav-link').length > 0) {
+      let firstNavButton = document.getElementsByClassName('nav-link')[0]
+      firstNavButton.className += ' active'
+   }   
 }
 
 //call at page load with the entire student list from HTML file
