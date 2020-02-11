@@ -9,13 +9,14 @@ This project also makes use of progressive enhancement - none of the Javasript i
 
 The project was created for partial fulfillment in my pursuit of the FullStack Javascript Techdegree from Team Treehouse.
 
+![](img/sampleScreenshot.PNG)
+Sample Screenshot
+
 ### Features:
 
 * Dynamically creates navigation links corresponding to the length of list and page display limit, which I set to 10. This code will work for any list length
 * After clicking a link the list is filtered to show only the students that fall within a given range
 * A search bar also dynamically filters the list in response to user's key strokes or copying and pasting content in the search bar and hitting the search button
-
-![](img/sampleScreenshot.PNG)
 
 ### Languages:
 * **JavaScript**: The Javascript is vanilla Javascript and does not use any frameworks or jQuery.  The JavaScript was written entirely by me.
