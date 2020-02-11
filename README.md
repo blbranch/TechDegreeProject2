@@ -1,5 +1,5 @@
-#Paginating and Filtering 
-##TechDegreeProject2
+# Paginating and Filtering 
+## TechDegreeProject2
 This project users JavaScript to paginate, or display a long lists across multiple pages rather than a single one.  It also dynamically creates navigation links corresponding to the length of the list and the page display limit, which I set to 10.  After clicking a link the list is filtered to show only the students that fall within a given range.  
 
 I also created a search bar that also dynamically filters the list with each key stroke.
