@@ -9,7 +9,7 @@ This project also makes use of progressive enhancement - none of the Javasript i
 
 The project was created for partial fulfillment in my pursuit of the FullStack Javascript Techdegree from Team Treehouse.
 
-![](img/screenshot.PNG)
+![](screenshot.PNG)
 Sample Screenshot
 
 ### Features:
