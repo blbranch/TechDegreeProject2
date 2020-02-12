@@ -7,8 +7,8 @@ const studentList = document.getElementsByClassName('student-list')[0].getElemen
 const showPage = (list, page) => {
    /*determines the starting and ending index for the student list.  
    If students are out of index they are hidden else they are displayed */
-   let startIndex = (page * pageDisplayLimit) - pageDisplayLimit;
-   let endIndex = page * pageDisplayLimit;
+   const startIndex = (page * pageDisplayLimit) - pageDisplayLimit;
+   const endIndex = page * pageDisplayLimit;
          
    for (let i = 0; i < list.length; i++) {
       let currentStudent = list[i] 
@@ -31,23 +31,23 @@ const appendPageLinks = (list) => {
    const pageCount = Math.ceil(list.length / pageDisplayLimit)
 
    //remove any prior nav links before creating new ones
-   let previousPages = document.getElementsByClassName('pagination');
+   const previousPages = document.getElementsByClassName('pagination');
    while(previousPages.length > 0) {
       previousPages[0].parentNode.removeChild(previousPages[0]);
    }
    
    //create div elements and add pagination class
-   let div = document.createElement('DIV');
+   const div = document.createElement('DIV');
    div.className = 'pagination';
    
    //create ul element
-   let page = document.getElementsByClassName('page')[0];
-   let ul = document.createElement('UL')
+   const page = document.getElementsByClassName('page')[0];
+   const ul = document.createElement('UL')
 
    //create list element and anchor tags equal to pagecount
    for (let i = 0; i < pageCount; i++) {
-      let li = document.createElement('LI');
-      let anchor = document.createElement('A');
+      const li = document.createElement('LI');
+      const anchor = document.createElement('A');
       anchor.textContent = i+1;
       anchor.href = '#';
       
@@ -93,14 +93,14 @@ const addSearchBar = () => {
 
    //create a div  for search bar and append input and buttons to it
 
-   let div = document.createElement('DIV');
+   const div = document.createElement('DIV');
    div.className = 'student-search';
 
-   let input = document.createElement('INPUT');
+   const input = document.createElement('INPUT');
    input.placeholder = 'Search for students...';
    input.setAttribute('id', 'searchBar');
 
-   let button = document.createElement('BUTTON');
+   const button = document.createElement('BUTTON');
    button.textContent = 'Search';
    button.setAttribute('id', 'searchButton');
 
@@ -108,8 +108,10 @@ const addSearchBar = () => {
    div.appendChild(button);
    
    //add input and buttons to page header
-   let header = document.getElementsByClassName('page-header cf')[0];
-   header.appendChild(div);      
+   if (document.getElementsByClassName('page-header cf').length > 0) {
+      const header = document.getElementsByClassName('page-header cf')[0];
+      header.appendChild(div);
+   }   
 }
 
 //call at page load
